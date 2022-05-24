@@ -2,7 +2,8 @@ from fastapi import APIRouter, Depends, Request, status, HTTPException
 from dependecies.authentication import get_current_user, get_header_token
 from database import SessionLocal
 from sql import models
-from models.user import User
+from models.user import User, UserType
+from typing import List
 
 db = SessionLocal()
 
@@ -13,18 +14,29 @@ router = APIRouter(
 )
 
 
+@router.get('/clients', response_model=List[User], status_code=status.HTTP_200_OK)
+def get_clients():
+    return db.query(models.Account).filter(models.Account.user_type == 2)
+
+
+@router.get('/workers', response_model=List[User], status_code=status.HTTP_200_OK)
+def get_workers():
+    return db.query(models.Account).filter(models.Account.user_type == 1)
+
+
 @router.get('/me', response_model=User, status_code=status.HTTP_200_OK)
 async def get_user(request: Request):
-    user = await get_current_user(request.headers.get('x-token'))
+    return await get_current_user(request.headers.get('x-token'))
 
-    return user
+
+@router.get('/types', status_code=status.HTTP_200_OK, response_model=List[UserType])
+def get_user_type():
+    return db.query(models.UserType).all()
 
 
 @router.get('/{user_id}', response_model=User, status_code=status.HTTP_200_OK)
 async def get_user(user_id: int):
-    user = db.query(models.Account).filter(models.Account.id == user_id).first()
-
-    return user
+    return db.query(models.Account).filter(models.Account.id == user_id).first()
 
 
 @router.put('/{user_id}', response_model=User, status_code=status.HTTP_200_OK)

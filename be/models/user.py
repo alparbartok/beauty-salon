@@ -24,6 +24,14 @@ class User(BaseModel):
         orm_mode = True
 
 
+class UserType(BaseModel):
+    id: int
+    type: str
+
+    class Config:
+        orm_mode = True
+
+
 class Login(BaseModel):
     email: str
     password: str

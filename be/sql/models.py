@@ -1,5 +1,5 @@
 from database import Base
-from sqlalchemy import String, Integer, Column, ForeignKey, Date, DateTime, Float
+from sqlalchemy import String, Integer, Column, ForeignKey, Date, DateTime, Float, Time
 
 
 class ServiceType(Base):
@@ -20,6 +20,7 @@ class Service(Base):
     name = Column(String(20), nullable=False)
     price = Column(Integer, nullable=False)
     service_type = Column(Integer, ForeignKey('service_type.id'))
+    duration = Column(Time, nullable=False)
 
 
 class Account(Base):
@@ -37,16 +38,13 @@ class Account(Base):
 class Appointment(Base):
     __tablename__ = 'appointment'
     id = Column(Integer, primary_key=True)
-    client_id = Column(Integer, ForeignKey('account.id'))
+    client_id = Column(Integer, ForeignKey('account.id'), nullable=True, default=None)
     worker_id = Column(Integer, ForeignKey('account.id'))
     price = Column(Float)
     date = Column(DateTime)
     status = Column(String(20), nullable=False)
     access_code = Column(String(20), nullable=True, default='')
-
-
-class AppointmentService(Base):
-    __tablename__ = 'appointment_service'
-    id = Column(Integer, primary_key=True)
-    appointment = Column(Integer, ForeignKey('appointment.id'))
-    service = Column(Integer, ForeignKey('service.id'))
+    name = Column(String(50), nullable=True)
+    email = Column(String(50), nullable=True)
+    phone_number = Column(String(50), nullable=True)
+    reason = Column(String(255), nullable=True)
