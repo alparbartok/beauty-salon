@@ -1,0 +1,85 @@
+.wrapper {
+  display: flex;
+  background-color: black;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 2rem;
+  box-shadow: 0 0.38rem 0.5rem #00000090;
+  position: sticky;
+  top: 0;
+}
+
+.image {
+  width: 3.5rem;
+  height: 3.5rem;
+}
+
+.link {
+  color: #ffd700bb;
+  text-decoration: none;
+  font-weight: 500;
+  padding: 0.7rem 1rem;
+  margin: 0 0.5rem;
+  border: 0.15rem solid #ffd700bb;
+  border-radius: 0.2rem;
+  background-clip: padding-box;
+
+  &:hover {
+    background-color: #ffd700bb;
+    color: black;
+  }
+}
+
+.activeLink {
+  background-color: #ffd700bb;
+  text-decoration: none;
+  font-weight: 500;
+  padding: 0.7rem 1rem;
+  color: black;
+  border-radius: 0.2rem;
+  border: 0.15rem solid #ffd700bb;
+  background-clip: padding-box;
+  margin: 0 0.5rem;
+}
+
+.searchButton {
+  padding: 0.5rem;
+  outline: 0;
+  border: 0;
+  font-size: 1rem;
+  text-transform: capitalize;
+  border-radius: 0.3rem;
+  background-color: #ffd700bb;
+  font-weight: 700;
+  margin-left: 1rem;
+  color: white;
+  border: 0.1rem solid #ffd700bb;
+  background-clip: padding-box;
+
+  &:hover {
+    background-color: black;
+    color: #ffd700bb;
+  }
+}
+
+.codeInput {
+  padding: 0.5rem;
+  font-size: 1rem;
+  border-radius: 0.3rem;
+  outline: none;
+  border: 0.1rem solid #ffd700bb;
+  color: white;
+  background-color: black;
+  font-weight: 500;
+
+  &::placeholder {
+    color: #ffd700bb;
+  }
+}
+
+.logoWrapper {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex: 0 1 35%;
+}
