@@ -1,0 +1,15 @@
+.wrapper {
+  background-color: white;
+  max-width: 50%;
+  min-width: 30%;
+  max-height: 50%;
+  padding: 0 2rem;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  border-radius: 0.5rem;
+  border: 0.1rem solid #ffd700bb;
+  box-shadow: .1rem .3rem .9rem black;
+  text-align: center;
+}
