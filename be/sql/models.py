@@ -40,7 +40,6 @@ class Appointment(Base):
     id = Column(Integer, primary_key=True)
     client_id = Column(Integer, ForeignKey('account.id'), nullable=True, default=None)
     worker_id = Column(Integer, ForeignKey('account.id'))
-    price = Column(Float)
     date = Column(DateTime)
     status = Column(String(20), nullable=False)
     access_code = Column(String(20), nullable=True, default='')
@@ -48,3 +47,4 @@ class Appointment(Base):
     email = Column(String(50), nullable=True)
     phone_number = Column(String(50), nullable=True)
     reason = Column(String(255), nullable=True)
+    service = Column(Integer, ForeignKey('service.id'), nullable=False)
