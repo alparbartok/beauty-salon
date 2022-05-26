@@ -1,19 +1,30 @@
 .loginIcon {
-  width: 2rem;
-  height: 2rem;
-  margin-left: 1rem;
-  border-radius: 50%;
+  display: flex;
+  align-items: center;
   cursor: pointer;
-
-  & > path {
-    fill: #ffd700bb;
-  }
+  padding: 0.3rem 0.8rem;
+  border-radius: 0.3rem;
+  border: 0.15rem solid black;
 
   &:hover {
-    background-color: #ffd700bb;
+    border-color: #ffd700bb;
+  }
+
+  & > label {
+    color: #ffd700bb;
+    font-weight: 700;
+    margin-left: 1rem;
+    cursor: pointer;
+  }
+
+  & > svg {
+    width: 2rem;
+    height: 2rem;
+    border-radius: 50%;
+    cursor: pointer;
 
     & > path {
-      fill: black;
+      fill: #ffd700bb;
     }
   }
 }
@@ -64,6 +75,7 @@
 }
 
 .loginWrapper {
+  position: relative;
   padding: 0 1rem;
   margin: 1rem 0;
   border-radius: 0.3rem;
@@ -86,6 +98,7 @@
   background-clip: border-box;
   border: 0.15rem solid #ffd700;
   font-weight: 700;
+  cursor: pointer;
 
   &:hover {
     background-color: black;
@@ -103,4 +116,26 @@
 .buttonWrapper {
   display: flex;
   justify-content: space-between;
+}
+
+.closeButton {
+  display: flex;
+  align-items: center;
+  position: absolute;
+  right: 0;
+  top: 0;
+  background-color: transparent;
+  outline: 0;
+  border: 0;
+  font-size: 1.4rem;
+  border-radius: 0.1rem;
+
+  &:focus {
+    outline: 0;
+    border: 0;
+  }
+
+  &:hover {
+    background-color: #dddddd;
+  }
 }

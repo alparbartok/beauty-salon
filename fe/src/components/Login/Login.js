@@ -1,26 +1,45 @@
-import { useState } from "react";
+import { forwardRef, useEffect, useImperativeHandle, useState } from "react";
 import { useForm } from "react-hook-form";
 import { Modal } from "../Shared/Modal/Modal";
 import { useAuth } from "../../hooks/useAuth";
 import { BsPersonCircle } from "react-icons/bs";
 import style from "./Login.module.scss";
+import { CgClose } from "react-icons/cg";
+import { useNavigate } from "react-router-dom";
 
-export const Login = () => {
+export const Login = forwardRef(({ registerRef }, ref) => {
+  const navigate = useNavigate();
   const [open, setOpen] = useState(false);
-  const { login, error } = useAuth();
+  const { login, error, setError, user, logged } = useAuth();
   const {
     register,
     handleSubmit,
     formState: { errors },
+    reset,
   } = useForm({
     email: "",
     password: "",
   });
 
-  const onSubmit = (data) => {
-    login(data);
-    setOpen(false);
+  useImperativeHandle(ref, () => ({
+    setOpen,
+  }));
+
+  const onSubmit = async (data) => {
+    try {
+      await login(data);
+      setOpen(false);
+    } catch (e) {
+      console.log(e);
+    }
   };
+
+  useEffect(() => {
+    if (!open) {
+      reset();
+      setError("");
+    }
+  }, [open]);
 
   return (
     <>
@@ -31,6 +50,13 @@ export const Login = () => {
             error && style.errorLoginWrapper
           }`}
         >
+          <button
+            type="button"
+            onClick={() => setOpen(false)}
+            className={style.closeButton}
+          >
+            <CgClose />
+          </button>
           <h1>Login</h1>
           {error && <p className={style.wrongCredentials}>{error}</p>}
           <div className={style.fieldWrapper}>
@@ -63,7 +89,14 @@ export const Login = () => {
             )}
           </div>
           <div className={style.buttonWrapper}>
-            <button className={style.loginButton}>
+            <button
+              type="button"
+              className={style.loginButton}
+              onClick={() => {
+                setOpen(false);
+                registerRef.current.setOpen(true);
+              }}
+            >
               Register
             </button>
             <button className={style.loginButton} type="submit">
@@ -72,10 +105,19 @@ export const Login = () => {
           </div>
         </form>
       </Modal>
-      <BsPersonCircle
+      <div
         className={style.loginIcon}
-        onClick={() => setOpen(true)}
-      />
+        onClick={() => {
+          logged ? navigate("account") : setOpen(true);
+        }}
+      >
+        <BsPersonCircle />
+        {user && (
+          <label>
+            {user.first_name} {user.last_name}
+          </label>
+        )}
+      </div>
     </>
   );
-};
+});

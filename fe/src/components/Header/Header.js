@@ -1,8 +1,13 @@
 import { NavLink } from "react-router-dom";
 import style from "./Header.module.scss";
 import { Login } from "../Login/Login";
+import { Register } from "../Register/Register";
+import { useRef } from "react";
 
 const Header = () => {
+  const loginRef = useRef();
+  const registerRef = useRef();
+
   return (
     <div className={style.wrapper}>
       <div className={style.logoWrapper}>
@@ -31,7 +36,8 @@ const Header = () => {
         >
           Contact
         </NavLink>
-        <Login />
+        <Login ref={loginRef} registerRef={registerRef} />
+        <Register ref={registerRef} loginRef={loginRef} />
       </div>
     </div>
   );
