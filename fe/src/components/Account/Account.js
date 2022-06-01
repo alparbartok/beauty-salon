@@ -28,16 +28,19 @@ export const Account = () => {
     email: user?.email,
   });
   const { user_types } = useUserTypes();
-  const { logged } = useAuth();
+  const { logged, logout } = useAuth();
   const navigate = useNavigate();
   const [isEdit, setIsEdit] = useState(false);
 
   useEffect(() => {
-    !logged && navigate('/');
+    !logged && navigate("/");
   }, [logged]);
 
   useEffect(() => {
-    reset(user);
+    reset({
+      ...user,
+      birth_date: user?.birth_date ? new Date(user.birth_date) : null,
+    });
   }, [user]);
 
   if (!user) {
@@ -54,14 +57,20 @@ export const Account = () => {
         phone_number: user.phone_number || null,
       })
       .then(({ data }) => {
-        reset(data);
+        reset({
+          ...data,
+          birth_date: data?.birth_date ? new Date(data.birth_date) : null,
+        });
         setIsEdit(false);
       })
       .catch((e) => console.error(e));
   };
 
   const handleDelete = () => {
-    userApi.deleteUser(user.id).then(() => navigate("/"));
+    userApi.deleteUser(user.id).then(() => {
+      logout();
+      navigate("/");
+    });
   };
 
   return (
@@ -149,7 +158,8 @@ export const Account = () => {
           <label>User type:</label>
           <div className={`${style.fieldWrapper} ${style.inputWrapper}`}>
             <label className={`${style.input} ${style.inputHidden}`}>
-              {user_types[user.user_type]?.type || "-"}
+              {user_types.find((type) => type.id === user.user_type).type ||
+                "-"}
             </label>
           </div>
         </div>

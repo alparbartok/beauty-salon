@@ -31,14 +31,19 @@ export const Register = forwardRef(({ loginRef }, ref) => {
     setOpen,
   }));
 
-  const onSubmit = ({ confirm_password, ...rest }) => {
-    register({
-      ...rest,
-      birth_date: rest.birth_date
-        ? format(rest.birth_date, "yyyy-MM-dd")
-        : null,
-      phone_number: rest.phone_number || null,
-    });
+  const onSubmit = async ({ confirm_password, ...rest }) => {
+    try {
+      await register({
+        ...rest,
+        birth_date: rest.birth_date
+          ? format(rest.birth_date, "yyyy-MM-dd")
+          : null,
+        phone_number: rest.phone_number || null,
+      });
+      setOpen(false);
+    } catch (e) {
+      console.log(e);
+    }
   };
 
   return (

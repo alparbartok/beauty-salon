@@ -29,8 +29,9 @@ export const useAuth = () => {
     setAuth({ logged: false });
   };
 
-  const register = (account) => {
-    authApi.register(account).then((res) => console.log(res));
+  const register = async (account) => {
+    await authApi.register(account);
+    await login({ email: account.email, password: account.password });
   };
 
   return {

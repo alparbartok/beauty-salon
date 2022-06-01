@@ -37,14 +37,22 @@ def login(user: Login):
 
 @router.post('/register', response_model=Token, status_code=status.HTTP_200_OK)
 def register(user: Account):
+    last_element = db.query(models.Account).order_by(models.Account.id.desc()).first()
+
+    if last_element is None:
+        user_id = 0
+    else:
+        user_id = last_element.id + 1
+
     new_user = models.Account(
-        id=len(db.query(models.Account).all()) + 1,
+        id=user_id,
         first_name=user.first_name,
         last_name=user.last_name,
         birth_date=user.birth_date,
         email=user.email,
         phone_number=user.phone_number,
         password=get_password_hash(user.password),
+        user_type=2
     )
     access_token = create_access_token(data={
         "email": new_user.email,
@@ -52,7 +60,8 @@ def register(user: Account):
         "first_name": new_user.first_name,
         "last_name": new_user.last_name,
         "birth_date": str(new_user.birth_date),
-        "phone_number": new_user.phone_number
+        "phone_number": new_user.phone_number,
+        "user_type": new_user.user_type
     })
 
     db.add(new_user)
