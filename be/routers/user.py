@@ -57,7 +57,7 @@ def update_user(user_id: int, user: User):
 def delete_user(user_id: int):
     user_to_delete = db.query(models.Account).filter(models.Account.id == user_id).first()
 
-    if user_to_delete in None:
+    if user_to_delete is None:
         raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail="Resource not found")
 
     db.delete(user_to_delete)

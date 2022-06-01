@@ -19,6 +19,7 @@ class User(BaseModel):
     birth_date: Optional[date]
     email: str
     phone_number: Optional[str]
+    user_type: int
 
     class Config:
         orm_mode = True
