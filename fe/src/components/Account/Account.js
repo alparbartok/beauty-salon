@@ -60,6 +60,10 @@ export const Account = () => {
       .catch((e) => console.error(e));
   };
 
+  const handleDelete = () => {
+    userApi.deleteUser(user.id).then(() => navigate("/"));
+  };
+
   return (
     <div className={style.wrapper}>
       <form className={style.accountWrapper} onSubmit={handleSubmit(onSubmit)}>
@@ -176,7 +180,7 @@ export const Account = () => {
         >
           <button
             className={`${style.button} ${style.cancelButton}`}
-            onClick={() => console.log("delete")}
+            onClick={handleDelete}
             type="button"
           >
             Delete account
