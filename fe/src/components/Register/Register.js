@@ -1,5 +1,5 @@
 import { forwardRef, useEffect, useImperativeHandle, useState } from "react";
-import { Controller, get, useForm } from "react-hook-form";
+import { Controller, useForm } from "react-hook-form";
 import { CgClose } from "react-icons/cg";
 import { useAuth } from "../../hooks/useAuth";
 import { Modal } from "../Shared/Modal/Modal";

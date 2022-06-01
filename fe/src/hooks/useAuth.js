@@ -1,9 +1,10 @@
 import { useContext, useState } from "react";
 import { authApi } from "../api/auth";
 import { AuthContext } from "../provider/Auth";
+import JwtDecode from "jwt-decode";
 
 export const useAuth = () => {
-  const { auth } = useContext(AuthContext);
+  const { auth, setAuth } = useContext(AuthContext);
 
   const [error, setError] = useState("");
   const login = async (credentials) => {
@@ -12,6 +13,10 @@ export const useAuth = () => {
       .then((res) => {
         setError("");
         localStorage.setItem("token", res.data.access_token);
+        setAuth({
+          logged: true,
+          user: JwtDecode(res.data.access_token),
+        });
       })
       .catch((err) => {
         setError(err.response.data.detail);

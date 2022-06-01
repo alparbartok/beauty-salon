@@ -6,6 +6,7 @@ import { BsPersonCircle } from "react-icons/bs";
 import style from "./Login.module.scss";
 import { CgClose } from "react-icons/cg";
 import { useNavigate } from "react-router-dom";
+import { MdLogout } from "react-icons/md";
 
 export const Login = forwardRef(({ registerRef }, ref) => {
   const navigate = useNavigate();
@@ -105,19 +106,22 @@ export const Login = forwardRef(({ registerRef }, ref) => {
           </div>
         </form>
       </Modal>
-      <div
-        className={style.loginIcon}
-        onClick={() => {
-          logged ? navigate("account") : setOpen(true);
-        }}
-      >
-        <BsPersonCircle />
-        {user && (
-          <label>
-            {user.first_name} {user.last_name}
-          </label>
-        )}
-      </div>
+      <>
+        <div
+          className={style.loginIcon}
+          onClick={() => {
+            logged ? navigate("account") : setOpen(true);
+          }}
+        >
+          <BsPersonCircle />
+          {user && (
+            <label>
+              {user.first_name} {user.last_name}
+            </label>
+          )}
+        </div>
+        {logged && <MdLogout className={style.logoutIcon} />}
+      </>
     </>
   );
 });

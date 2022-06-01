@@ -139,3 +139,17 @@
     background-color: #dddddd;
   }
 }
+
+.logoutIcon {
+  width: 1.6rem;
+  height: 1.6rem;
+  border-radius: 50%;
+  cursor: pointer;
+  color: #ffd700bb;
+  padding: .3rem;
+
+  &:hover {
+    color: black;
+    background-color: #ffd700bb;
+  }
+}
