@@ -11,7 +11,7 @@ import { MdLogout } from "react-icons/md";
 export const Login = forwardRef(({ registerRef }, ref) => {
   const navigate = useNavigate();
   const [open, setOpen] = useState(false);
-  const { login, error, setError, user, logged } = useAuth();
+  const { login, error, setError, user, logged, logout } = useAuth();
   const {
     register,
     handleSubmit,
@@ -120,7 +120,15 @@ export const Login = forwardRef(({ registerRef }, ref) => {
             </label>
           )}
         </div>
-        {logged && <MdLogout className={style.logoutIcon} />}
+        {logged && (
+          <MdLogout
+            className={style.logoutIcon}
+            onClick={() => {
+              logout();
+              navigate("/");
+            }}
+          />
+        )}
       </>
     </>
   );

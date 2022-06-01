@@ -24,6 +24,11 @@ export const useAuth = () => {
       });
   };
 
+  const logout = () => {
+    localStorage.removeItem("token");
+    setAuth({ logged: false });
+  };
+
   const register = (account) => {
     authApi.register(account).then((res) => console.log(res));
   };
@@ -35,5 +40,6 @@ export const useAuth = () => {
     register,
     error,
     setError,
+    logout,
   };
 };

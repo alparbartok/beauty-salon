@@ -33,7 +33,7 @@ export const Account = () => {
   const [isEdit, setIsEdit] = useState(false);
 
   useEffect(() => {
-    !logged && navigate();
+    !logged && navigate('/');
   }, [logged]);
 
   useEffect(() => {
