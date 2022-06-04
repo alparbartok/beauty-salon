@@ -97,16 +97,50 @@ async def create_appointment(request: Request, appointment: NewAppointment):
     return response
 
 
-@router.get('/{code}', status_code=status.HTTP_200_OK, response_model=Appointment)
+@router.get('/{code}', status_code=status.HTTP_200_OK, response_model=NewAppointmentResponse)
 def get_appointment_by_code(code: str = Path(None, description="Appointments access code")):
-    return db.query(models.Appointment).filter(models.Appointment.access_code == code).first()
+    appointment = db.query(models.Appointment).filter(models.Appointment.access_code == code).first()
+
+    if appointment is None:
+        raise HTTPException(status_code=status.HTTP_404_NOT_FOUND)
+
+    worker = db.query(models.Account).filter(models.Account.id == appointment.worker_id).first()
+    service = db.query(models.Service).filter(models.Service.id == appointment.service).first()
+
+    if appointment.client_id is None:
+        response = NewAppointmentResponse(
+            worker=f'{worker.first_name} {worker.last_name}',
+            date=appointment.date,
+            name=appointment.name,
+            email=appointment.email,
+            phone_number=appointment.phone_number,
+            service=service.name,
+            price=service.price,
+            status=appointment.status,
+            access_code=appointment.access_code
+        )
+    else:
+        user = db.query(models.Account).filter(models.Account.id == appointment.client_id).first()
+        response = NewAppointmentResponse(
+            worker=f'{worker.first_name} {worker.last_name}',
+            date=appointment.date,
+            name=f'{user.first_name} {user.last_name}',
+            email=user.email,
+            phone_number=user.phone_number,
+            service=service.name,
+            price=service.price,
+            status=appointment.status,
+            access_code=appointment.access_code
+        )
+
+    return response
 
 
 @router.delete('/{code}', status_code=status.HTTP_200_OK)
 def delete_appointment(code: str = Path(None, description="Appointments access code")):
     appointment_to_delete = db.query(models.Appointment).filter(models.Appointment.access_code == code).first()
 
-    if appointment_to_delete in None:
+    if appointment_to_delete is None:
         raise HTTPException(status_code=status.HTTP_404_NOT_FOUND)
 
     db.delete(appointment_to_delete)
