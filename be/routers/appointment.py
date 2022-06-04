@@ -207,7 +207,7 @@ def confirm_appointment(code: str = Path(None, description="Appointments access 
 
 @router.post('/refuse/{code}')
 def refuse_appointment(message: str, code: str = Path(None, description="Appointments access code")):
-    appointment_to_refuse = db.query(models.Appointment).filter(models.Appointment.access_code == code)
+    appointment_to_refuse = db.query(models.Appointment).filter(models.Appointment.access_code == code).first()
     appointment_to_refuse.status = 'refused'
     appointment_to_refuse.reason = message
 
