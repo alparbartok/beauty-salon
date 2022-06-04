@@ -8,6 +8,7 @@ const MainRoutes = () => {
     <Routes>
       <Route index element={<Home />} />
       <Route path="/appointments" element={<Appointments />} />
+      <Route path="/appointments/:code" element={<Appointments />} />
       <Route path="/account" element={<Account />} />
     </Routes>
   );

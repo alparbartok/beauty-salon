@@ -19,7 +19,6 @@ export const useServices = (type) => {
 
   useEffect(() => {
     if (type) {
-      console.log(type);
       populatorApi
         .getServicePopulator(type)
         .then(({ data }) => setState(data))

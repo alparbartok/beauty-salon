@@ -1,6 +1,6 @@
 import style from "./Appointments.module.scss";
 
-export const AppointmentConfirmation = ({ data, onClose }) => (
+export const AppointmentConfirmation = ({ data, footer }) => (
   <div className={style.formWrapper}>
     <h1>Booked appointment's full details</h1>
     <div className={style.confirmationWrapper}>
@@ -41,8 +41,6 @@ export const AppointmentConfirmation = ({ data, onClose }) => (
         <label>{data.price}</label>
       </div>
     </div>
-    <button onClick={onClose} className={style.deleteButton}>
-      Back
-    </button>
+    {footer}
   </div>
 );

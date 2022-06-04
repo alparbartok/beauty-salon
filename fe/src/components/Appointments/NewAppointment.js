@@ -70,7 +70,14 @@ export const NewAppointment = () => {
     return (
       <AppointmentConfirmation
         data={confirmation}
-        onClose={() => setConfirmation(undefined)}
+        footer={
+          <button
+            onClick={() => setConfirmation(undefined)}
+            className={style.deleteButton}
+          >
+            Back
+          </button>
+        }
       />
     );
   }

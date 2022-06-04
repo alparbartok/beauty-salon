@@ -31,7 +31,7 @@ export const Login = forwardRef(({ registerRef }, ref) => {
       await login(data);
       setOpen(false);
     } catch (e) {
-      console.log(e);
+      console.error(e);
     }
   };
 

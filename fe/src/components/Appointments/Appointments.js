@@ -1,10 +1,12 @@
 import { useState } from "react";
-import { Appointment, NewAppointment } from "./";
+import { useParams } from "react-router-dom";
+import { AppointmentSearch, NewAppointment } from "./";
 
 import style from "./Appointments.module.scss";
 
 export const Appointments = () => {
-  const [activeTab, setActiveTab] = useState(true);
+  const params = useParams();
+  const [activeTab, setActiveTab] = useState(!params?.code);
 
   return (
     <div className={style.mainWrapper}>
@@ -24,7 +26,7 @@ export const Appointments = () => {
           Search appointment
         </button>
       </div>
-      {activeTab ? <NewAppointment /> : <Appointment />}
+      {activeTab ? <NewAppointment /> : <AppointmentSearch />}
     </div>
   );
 };

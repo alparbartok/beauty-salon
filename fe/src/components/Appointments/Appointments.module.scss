@@ -19,7 +19,7 @@
 }
 
 .tabButton {
-  font-family: 'Montserrat', sans-serif;
+  font-family: "Montserrat", sans-serif;
   font-weight: 700;
   font-size: 1.5rem;
   padding: 0.7rem 2rem;
@@ -38,7 +38,7 @@
 }
 
 .tabButtonActive {
-  font-family: 'Montserrat', sans-serif;
+  font-family: "Montserrat", sans-serif;
   font-weight: 700;
   color: black;
   background-color: pink;
@@ -119,6 +119,8 @@
   padding: 0.5rem 2rem;
   border-radius: 0.3rem;
   box-shadow: 0.1rem 0.1rem 0.7rem black;
+  font-family: "Montserrat", sans-serif;
+  font-weight: 700;
   margin-top: 2rem;
 
   &:hover {
@@ -200,4 +202,30 @@
       font-weight: 700;
     }
   }
+}
+
+.searchButton {
+  background-color: pink;
+  border: 0.15rem solid pink;
+  font-family: "Montserrat", sans-serif;
+  font-weight: 700;
+  border-radius: 0.3rem;
+  padding: 0.5rem 2rem;
+  margin-top: 1rem;
+  margin-left: 1rem;
+  font-family: "Montserrat", sans-serif;
+  font-weight: 700;
+  cursor: pointer;
+
+  &:hover {
+    background-color: black;
+    color: pink;
+  }
+}
+
+.buttonWrapper {
+  display: flex;
+  justify-content: space-between;
+  padding: 0 2rem;
+  margin-top: -2rem;
 }

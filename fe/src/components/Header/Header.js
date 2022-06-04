@@ -1,18 +1,37 @@
-import { NavLink } from "react-router-dom";
+import { NavLink, useLocation, useNavigate } from "react-router-dom";
 import style from "./Header.module.scss";
 import { Login } from "../Login/Login";
 import { Register } from "../Register/Register";
-import { useRef } from "react";
+import { useRef, useState } from "react";
 
 const Header = () => {
+  const location = useLocation();
   const loginRef = useRef();
   const registerRef = useRef();
+  const [access_code, setAccessCode] = useState("");
+  const navigate = useNavigate();
 
   return (
     <div className={style.wrapper}>
-      <div className={style.logoWrapper}>
-        <input className={style.codeInput} placeholder="Appointment code" />
-        <button className={style.searchButton}>search</button>
+      <div
+        className={style.logoWrapper}
+        style={{
+          visibility: location.pathname.includes("/appointments")
+            ? "hidden"
+            : "visible",
+        }}
+      >
+        <input
+          className={style.codeInput}
+          placeholder="Appointment code"
+          onChange={(v) => setAccessCode(v.currentTarget.value)}
+        />
+        <button
+          className={style.searchButton}
+          onClick={() => navigate(`/appointments/${access_code}`)}
+        >
+          search
+        </button>
       </div>
       <img
         className={style.image}

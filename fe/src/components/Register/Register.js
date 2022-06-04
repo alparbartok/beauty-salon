@@ -42,7 +42,7 @@ export const Register = forwardRef(({ loginRef }, ref) => {
       });
       setOpen(false);
     } catch (e) {
-      console.log(e);
+      console.error(e);
     }
   };
 
