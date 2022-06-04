@@ -1,14 +1,19 @@
 import { AiOutlinePlusCircle } from "react-icons/ai";
+import { useLocation } from "react-router-dom";
 import style from "./AppointmentButton.module.scss";
 
 const AppointmentButton = () => {
+  const { pathname } = useLocation();
+
+  if (pathname === "/appointments") {
+    return null;
+  }
+
   return (
-    <div className={style.wrapper}>
-      <button className={style.button}>
-        <AiOutlinePlusCircle color="white"/>
-        <label>I want an appointment</label>
-      </button>
-    </div>
+    <button className={style.button}>
+      <AiOutlinePlusCircle />
+      <label>I want an appointment</label>
+    </button>
   );
 };
 

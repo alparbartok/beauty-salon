@@ -1,0 +1,203 @@
+.formWrapper {
+  display: flex;
+  flex-direction: column;
+  width: 50%;
+  margin: 0 auto;
+  border: 0.15rem solid pink;
+  border-radius: 0.3rem;
+  padding: 1.5rem;
+  padding-top: 0.5rem;
+  box-shadow: 0.1rem 0.1rem 0.7rem black;
+  background-color: white;
+  z-index: 1;
+
+  h1 {
+    text-align: center;
+    border-bottom: 0.1rem solid pink;
+    padding-bottom: 1rem;
+  }
+}
+
+.tabButton {
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 700;
+  font-size: 1.5rem;
+  padding: 0.7rem 2rem;
+  border-radius: 0.3rem;
+  border: 0.15rem solid pink;
+  background-color: black;
+  color: pink;
+  box-shadow: 0.1rem 0.2rem 0.8rem black;
+  background-clip: padding-box;
+
+  &:hover {
+    color: black;
+    background-color: pink;
+    border-color: black;
+  }
+}
+
+.tabButtonActive {
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 700;
+  color: black;
+  background-color: pink;
+  border-color: black;
+
+  &:hover {
+    color: pink;
+    background-color: black;
+    border-color: pink;
+  }
+}
+
+.tabButtonWrapper {
+  display: flex;
+  justify-content: space-around;
+  padding: 1rem;
+  margin-bottom: 1rem;
+}
+
+.mainWrapper {
+  background-color: rgba(black, 0.3);
+  display: flex;
+  flex-direction: column;
+  min-height: calc(100vh - 3.5rem);
+}
+
+.select {
+  margin-top: 1rem;
+}
+
+.textInput {
+  background-color: hsl(0, 0%, 100%);
+  border: 1px solid hsl(0, 0%, 80%);
+  border-radius: 4px;
+  font-size: 1rem;
+  padding: 0.5rem;
+  outline: 0;
+  width: calc(100% - 1.2rem);
+  margin-top: 1rem;
+  font-family: "Montserrat", sans-serif;
+  font-weight: 500;
+
+  &:hover,
+  &:active,
+  &:focus {
+    border-color: pink;
+  }
+
+  &::placeholder {
+    color: hsl(0, 0%, 55%);
+  }
+}
+
+.submitButton {
+  align-self: center;
+  background-color: green;
+  color: white;
+  border: 0.15rem solid white;
+  font-size: 1.3rem;
+  padding: 0.5rem 2rem;
+  border-radius: 0.3rem;
+  box-shadow: 0.1rem 0.1rem 0.7rem black;
+  margin-top: 2rem;
+
+  &:hover {
+    border-color: green;
+    color: green;
+    background-color: white;
+  }
+}
+
+.deleteButton {
+  align-self: center;
+  background-color: red;
+  color: white;
+  border: 0.15rem solid white;
+  font-size: 1.3rem;
+  padding: 0.5rem 2rem;
+  border-radius: 0.3rem;
+  box-shadow: 0.1rem 0.1rem 0.7rem black;
+  margin-top: 2rem;
+
+  &:hover {
+    border-color: red;
+    color: red;
+    background-color: white;
+  }
+}
+
+.errorMessage {
+  color: red;
+  font-weight: 700;
+  margin-top: 0.5rem;
+}
+
+.flexColumn {
+  display: flex;
+  flex-direction: column;
+}
+
+.guestForm {
+  border-bottom: 0.1rem solid pink;
+  padding-bottom: 2rem;
+  margin-bottom: 1rem;
+  position: relative;
+}
+
+.bottomSeparator {
+  position: absolute;
+  bottom: 0;
+  right: 50%;
+  transform: translate(50%, 50%);
+  background-color: white;
+  padding: 0 1.5rem;
+  font-weight: 700;
+}
+
+.topSeparator {
+  position: absolute;
+  top: 0;
+  right: 50%;
+  transform: translate(50%, calc(-50% - 1.35rem));
+  background-color: white;
+  padding: 0 1.5rem;
+  font-weight: 700;
+}
+
+.confirmationWrapper {
+  position: relative;
+  border-bottom: 0.1rem solid pink;
+  padding-bottom: 1.2rem;
+  margin-bottom: 1.2rem;
+
+  &:last-of-type {
+    border: 0;
+    padding: 0;
+    margin: 0;
+  }
+
+  & > label {
+    position: absolute;
+    top: 0;
+    right: 50%;
+    transform: translate(50%, calc(-50% - 1.35rem));
+    background-color: white;
+    padding: 0 1.5rem;
+    font-weight: 700;
+  }
+}
+
+.fieldWrapper {
+  display: flex;
+
+  & > label {
+    flex: 1 0 50%;
+    margin: 0.5rem 0;
+
+    &:first-of-type {
+      font-weight: 700;
+    }
+  }
+}

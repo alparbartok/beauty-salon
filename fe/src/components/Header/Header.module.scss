@@ -7,6 +7,7 @@
   box-shadow: 0 0.38rem 0.5rem #00000090;
   position: sticky;
   top: 0;
+  z-index: 999;
 }
 
 .image {
@@ -15,65 +16,67 @@
 }
 
 .link {
-  color: #ffd700bb;
+  color: pink;
   text-decoration: none;
-  font-weight: 500;
+  font-weight: 700;
   padding: 0.7rem 1rem;
   margin: 0 0.5rem;
-  border: 0.15rem solid #ffd700bb;
+  border: 0.15rem solid pink;
   border-radius: 0.2rem;
   background-clip: padding-box;
 
   &:hover {
-    background-color: #ffd700bb;
+    background-color: pink;
     color: black;
   }
 }
 
 .activeLink {
-  background-color: #ffd700bb;
+  background-color: pink;
   text-decoration: none;
-  font-weight: 500;
+  font-weight: 700;
   padding: 0.7rem 1rem;
   color: black;
   border-radius: 0.2rem;
-  border: 0.15rem solid #ffd700bb;
+  border: 0.15rem solid pink;
   background-clip: padding-box;
   margin: 0 0.5rem;
 }
 
 .searchButton {
+  font-family: "Montserrat", sans-serif;
   padding: 0.5rem;
   outline: 0;
   border: 0;
   font-size: 1rem;
   text-transform: capitalize;
   border-radius: 0.3rem;
-  background-color: #ffd700bb;
+  background-color: pink;
   font-weight: 700;
   margin-left: 1rem;
-  color: white;
-  border: 0.15rem solid #ffd700bb;
+  color: black;
+  border: 0.15rem solid pink;
   background-clip: padding-box;
 
   &:hover {
     background-color: black;
-    color: #ffd700bb;
+    color: pink;
   }
 }
 
 .codeInput {
+  font-family: "Montserrat", sans-serif;
   padding: 0.5rem;
   font-size: 1rem;
   border-radius: 0.3rem;
   outline: none;
-  border: 0.15rem solid #ffd700bb;
+  border: 0.15rem solid pink;
   color: white;
   background-color: black;
-  font-weight: 500;
+  font-weight: 700;
 
   &::placeholder {
-    color: #ffd700bb;
+    color: pink;
   }
 }
 

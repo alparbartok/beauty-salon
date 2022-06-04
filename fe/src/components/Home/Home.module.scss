@@ -11,16 +11,15 @@
   display: flex;
   padding: 2rem 0;
   margin: 0 2rem;
-  border-bottom: 0.1rem solid #ffd700bb;
+  border-bottom: 0.1rem solid pink;
   justify-content: space-around;
 
   & > label {
     flex: 0 1 35%;
-    border: 0.1rem solid #ffd700bb;
-    border-radius: .3rem;
+    border: 0.1rem solid pink;
+    border-radius: 0.3rem;
     padding: 1rem;
-  box-shadow: 0.1rem 0rem 0.3rem 0.1rem #ffd70055;
-
+    box-shadow: 0.1rem 0rem 0.3rem 0.1rem #ffd70055;
   }
 
   &:nth-of-type(2n) img {

@@ -8,7 +8,18 @@
   left: 50%;
   transform: translate(-50%, -50%);
   border-radius: 0.5rem;
-  border: 0.1rem solid #ffd700bb;
+  border: 0.1rem solid pink;
   box-shadow: .1rem .3rem .9rem black;
   text-align: center;
+}
+
+.backdrop {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  right: 0;
+  left: 0;
+  height: 100vh;
+  background-color: #00000050;
+  z-index: 999;
 }

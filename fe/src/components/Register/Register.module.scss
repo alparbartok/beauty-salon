@@ -21,7 +21,7 @@
 }
 
 .loginButton {
-  background-color: #ffd700;
+  background-color: pink;
   outline: 0;
   border: 0;
   font-size: 1.2rem;
@@ -30,13 +30,13 @@
   border-radius: 0.3rem;
   margin: 1rem 0;
   background-clip: border-box;
-  border: 0.15rem solid #ffd700;
+  border: 0.15rem solid pink;
   font-weight: 700;
   cursor: pointer;
 
   &:hover {
     background-color: black;
-    color: #ffd700;
+    color: pink;
   }
 }
 
@@ -58,7 +58,7 @@
 }
 
 .loginInput {
-  border: 0.15rem solid #ffd700bb;
+  border: 0.15rem solid pink;
   font-size: 1.2rem;
   padding: 0.5rem;
   border-radius: 0.3rem;
@@ -68,7 +68,7 @@
   &:hover,
   &:active,
   &:focus {
-    border-color: #ffd700;
+    border-color: pink;
   }
 }
 
@@ -91,7 +91,7 @@
   border-radius: 0.3rem;
 
   h1 {
-    border-bottom: 0.1rem solid #ffd700;
+    border-bottom: 0.1rem solid pink;
     padding-bottom: 0.5rem;
   }
 }

@@ -158,7 +158,7 @@ export const Account = () => {
           <label>User type:</label>
           <div className={`${style.fieldWrapper} ${style.inputWrapper}`}>
             <label className={`${style.input} ${style.inputHidden}`}>
-              {user_types.find((type) => type.id === user.user_type).type ||
+              {user_types.find((type) => type.id === user.user_type)?.type ||
                 "-"}
             </label>
           </div>

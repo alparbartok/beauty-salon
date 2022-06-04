@@ -32,9 +32,9 @@ const Header = () => {
           className={({ isActive }) =>
             isActive ? style.activeLink : style.link
           }
-          to="/contact"
+          to="/appointments"
         >
-          Contact
+          Appointments
         </NavLink>
         <Login ref={loginRef} registerRef={registerRef} />
         <Register ref={registerRef} loginRef={loginRef} />

@@ -1,24 +1,18 @@
-.wrapper {
-  background-color: black;
+.button {
   position: absolute;
+  overflow: hidden;
   bottom: 1rem;
   right: 1rem;
   padding: 0;
   border-radius: 0.5rem;
-  overflow: hidden;
+  background-color: pink;
+  border: 0.15rem solid pink;
   box-shadow: 0.1rem 0.1rem 0.5rem black;
-  cursor: pointer;
-}
-
-.button {
-  background-color: #ffd700bb;
   border: 0;
-  padding: 0;
   margin: 0;
-  color: white;
+  color: black;
   padding: 0.5rem;
   cursor: pointer;
-  border: 0.15rem solid #ffd700bb;
   background-clip: padding-box;
   border-radius: 0.5rem;
   display: flex;
@@ -39,5 +33,6 @@
 
   &:hover {
     background-color: black;
+    color: pink;
   }
 }
