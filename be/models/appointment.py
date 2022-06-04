@@ -37,4 +37,3 @@ class NewAppointmentResponse(BaseModel):
     price: str
     status: str
     access_code: str
-

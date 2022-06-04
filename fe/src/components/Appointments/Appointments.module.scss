@@ -229,3 +229,78 @@
   padding: 0 2rem;
   margin-top: -2rem;
 }
+
+.listWrapper {
+  flex: 0 1 calc(50% - 4rem);
+  margin-top: 2rem;
+  height: calc(100vh - 5rem);
+  overflow-y: auto;
+  overflow-x: visible;
+
+  &::-webkit-scrollbar {
+    display: "none";
+  }
+}
+
+.listElementWrapper {
+  background-color: white;
+  box-shadow: 0.1rem 0.1rem 0.7rem black;
+  margin-bottom: 1.5rem;
+  border-radius: 0.3rem;
+  border: 0.15rem solid pink;
+  padding: 1rem;
+}
+
+.listElement {
+  border-top: 0.15rem solid pink;
+  position: relative;
+  margin-top: 1rem;
+  padding: 2rem 0;
+
+  &:last-of-type {
+    padding-bottom: 0;
+  }
+
+  & > label {
+    position: absolute;
+    top: 0;
+    left: 50%;
+    transform: translate(-50%, calc(-50% - 0.1rem));
+    background-color: white;
+    padding: 0 1rem;
+  }
+}
+
+.button {
+  padding: 0.5rem 1rem;
+  font-size: 1rem;
+  border-radius: 0.3rem;
+  margin-top: 1.5rem;
+  box-shadow: 0.1rem 0.1rem 0.7rem black;
+  font-family: "Montserrat", "sans-serif";
+  font-weight: 700;
+}
+
+.rejectButton {
+  background-color: red;
+  color: white;
+  border: 0.15rem solid white;
+
+  &:hover {
+    background-color: white;
+    border-color: red;
+    color: red;
+  }
+}
+
+.confirmButton {
+  background-color: green;
+  color: white;
+  border: 0.15rem solid white;
+
+  &:hover {
+    background-color: white;
+    border-color: green;
+    color: green;
+  }
+}

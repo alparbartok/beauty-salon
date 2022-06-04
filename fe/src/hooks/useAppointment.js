@@ -12,5 +12,18 @@ export const useAppointments = (code) => {
       .catch((e) => setError(e.response.status));
   }, [code]);
 
-  return {appointment: state, error};
+  return { appointment: state, error };
+};
+
+export const useOwnAppointments = (refresh) => {
+  const [state, setState] = useState([]);
+
+  useEffect(() => {
+    appointmentApi
+      .getAppointments()
+      .then(({ data }) => setState(data))
+      .catch((e) => console.error(e));
+  }, [refresh]);
+
+  return state;
 };

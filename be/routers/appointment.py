@@ -17,16 +17,66 @@ router = APIRouter(
 )
 
 
-@router.get('', response_model=List[Appointment], status_code=status.HTTP_200_OK)
-async def get_all_appointments(request: Request = Depends(get_header_token)):
-    user = await get_current_user(request.headers.get('x-token'))
+@router.get('', response_model=List[NewAppointmentResponse], status_code=status.HTTP_200_OK)
+async def get_all_appointments(request: Request):
+    token = request.headers.get('x-token')
+    payload = jwt.decode(token, SECRET_KEY, algorithms=[ALGORITHM])
+    user = db.query(models.Account).filter(models.Account.id == payload.get('id')).first()
+
+    response = []
 
     if user.user_type == 1:
         appointments = db.query(models.Appointment).filter(models.Appointment.worker_id == user.id)
+
+        for i in appointments:
+            service = db.query(models.Service).filter(models.Service.id == i.service).first()
+
+            if i.client_id is None:
+                response.append(NewAppointmentResponse(
+                    worker='Me',
+                    date=i.date,
+                    name=i.name,
+                    email=i.email,
+                    phone_number=i.phone_number,
+                    service=service.name,
+                    price=service.price,
+                    status=i.status,
+                    access_code=i.access_code
+                ))
+            else:
+                client = db.query(models.Account).filter(models.Account.id == i.client_id).first()
+
+                response.append(NewAppointmentResponse(
+                    worker='Me',
+                    date=i.date,
+                    name=f'{client.first_name} {client.last_name}',
+                    email=client.email,
+                    phone_number=client.phone_number,
+                    service=service.name,
+                    price=service.price,
+                    status=i.status,
+                    access_code=i.access_code
+                ))
     else:
         appointments = db.query(models.Appointment).filter(models.Appointment.client_id == user.id)
 
-    return appointments
+        for i in appointments:
+            worker = db.query(models.Account).filter(models.Account.id == i.worker_id).first()
+            service = db.query(models.Service).filter(models.Service.id == i.service).first()
+
+            response.append(NewAppointmentResponse(
+                worker=f'{worker.first_name} {worker.last_name}',
+                date=i.date,
+                name=f'{user.first_name} {user.last_name}',
+                email=user.email,
+                phone_number=user.phone_number,
+                service=service.name,
+                price=service.price,
+                status=i.status,
+                access_code=i.access_code
+            ))
+
+    return response
 
 
 @router.post('', response_model=NewAppointmentResponse, status_code=status.HTTP_200_OK)
@@ -147,9 +197,9 @@ def delete_appointment(code: str = Path(None, description="Appointments access c
     db.commit()
 
 
-@router.post('/confirm/{code}', status_code=status.HTTP_200_OK)
+@router.put('/confirm/{code}', status_code=status.HTTP_200_OK)
 def confirm_appointment(code: str = Path(None, description="Appointments access code")):
-    appointment_to_confirm = db.query(models.Appointment).filter(models.Appointment.access_code == code)
+    appointment_to_confirm = db.query(models.Appointment).filter(models.Appointment.access_code == code).first()
     appointment_to_confirm.status = 'confirmed'
 
     db.commit()
