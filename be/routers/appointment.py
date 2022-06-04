@@ -1,11 +1,13 @@
 from fastapi import APIRouter, Path, status, Depends, Request, HTTPException
-from models.appointment import Appointment, NewAppointment
+from models.appointment import Appointment, NewAppointment, NewAppointmentResponse
 from dependecies.appointment import generate_access_code
 from dependecies.authentication import get_header_token, get_current_user
 from database import SessionLocal
 from sql import models
 from typing import List
 from datetime import datetime
+from jose import jwt
+from dependecies.authentication import SECRET_KEY, ALGORITHM
 
 db = SessionLocal()
 
@@ -27,7 +29,7 @@ async def get_all_appointments(request: Request = Depends(get_header_token)):
     return appointments
 
 
-@router.post('', response_model=Appointment, status_code=status.HTTP_200_OK)
+@router.post('', response_model=NewAppointmentResponse, status_code=status.HTTP_200_OK)
 async def create_appointment(request: Request, appointment: NewAppointment):
     token = request.headers.get('x-token')
 
@@ -39,10 +41,11 @@ async def create_appointment(request: Request, appointment: NewAppointment):
         if existing_access_code is None:
             break
 
-    price = db.query(models.Service).filter(models.Appointment.id == appointment.service).first().price
+    service = db.query(models.Service).filter(models.Service.id == appointment.service).first()
+    worker = db.query(models.Account).filter(models.Account.id == appointment.worker_id).first()
 
     if token is None:
-        new_appointment = Appointment(
+        new_appointment = models.Appointment(
             worker_id=appointment.worker_id,
             date=appointment.date,
             status='pending',
@@ -50,22 +53,48 @@ async def create_appointment(request: Request, appointment: NewAppointment):
             name=appointment.name,
             email=appointment.email,
             phone_number=appointment.phone_number,
-            price=price
+            service=appointment.service
+        )
+
+        response = NewAppointmentResponse(
+            worker=f'{worker.first_name} {worker.last_name}',
+            date=new_appointment.date,
+            name=new_appointment.name,
+            email=new_appointment.email,
+            phone_number=new_appointment.phone_number,
+            service=service.name,
+            price=service.price,
+            status=new_appointment.status,
+            access_code=new_appointment.access_code
         )
     else:
-        new_appointment = Appointment(
+        payload = jwt.decode(token, SECRET_KEY, algorithms=[ALGORITHM])
+
+        new_appointment = models.Appointment(
             worker_id=appointment.worker_id,
             date=appointment.date,
             status='pending',
             access_code=access_code,
-            price=price,
-            client_id=token.access_token.id
+            client_id=payload.get('id'),
+            service=appointment.service
+        )
+
+        response = NewAppointmentResponse(
+            worker=f'{worker.first_name} {worker.last_name}',
+            date=new_appointment.date,
+            name=f"{payload.get('first_name')} {payload.get('last_name')}",
+            email=payload.get('email'),
+            phone_number=payload.get('phone_number'),
+            service=service.name,
+            price=service.price,
+            status=new_appointment.status,
+            access_code=new_appointment.access_code
         )
 
     db.add(new_appointment)
     db.commit()
 
-    return new_appointment
+    return response
 
 
 @router.get('/{code}', status_code=status.HTTP_200_OK, response_model=Appointment)

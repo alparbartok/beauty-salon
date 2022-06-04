@@ -24,6 +24,7 @@ def login(user: Login):
         )
 
     access_token = create_access_token(data={
+        "id": local_user.id,
         "email": local_user.email,
         "user_type": local_user.user_type,
         "first_name": local_user.first_name,
@@ -55,13 +56,13 @@ def register(user: Account):
         user_type=2
     )
     access_token = create_access_token(data={
+        "id": user_id,
         "email": new_user.email,
         "user_type": new_user.user_type,
         "first_name": new_user.first_name,
         "last_name": new_user.last_name,
         "birth_date": str(new_user.birth_date),
         "phone_number": new_user.phone_number,
-        "user_type": new_user.user_type
     })
 
     db.add(new_user)

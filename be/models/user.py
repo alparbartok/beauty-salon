@@ -25,6 +25,11 @@ class User(BaseModel):
         orm_mode = True
 
 
+class EmployeePopulator(BaseModel):
+    value: int
+    label: str
+
+
 class UserType(BaseModel):
     id: int
     type: str

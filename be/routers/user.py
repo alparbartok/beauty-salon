@@ -10,21 +10,17 @@ db = SessionLocal()
 router = APIRouter(
     prefix='/user',
     tags=['User'],
-    dependencies=[Depends(get_header_token)]
 )
 
 
-@router.get('/clients', response_model=List[User], status_code=status.HTTP_200_OK)
+@router.get('/clients', response_model=List[User], status_code=status.HTTP_200_OK,
+            dependencies=[Depends(get_header_token)]
+            )
 def get_clients():
     return db.query(models.Account).filter(models.Account.user_type == 2)
 
 
-@router.get('/workers', response_model=List[User], status_code=status.HTTP_200_OK)
-def get_workers():
-    return db.query(models.Account).filter(models.Account.user_type == 1)
-
-
-@router.get('/me', response_model=User, status_code=status.HTTP_200_OK)
+@router.get('/me', response_model=User, status_code=status.HTTP_200_OK, dependencies=[Depends(get_header_token)])
 async def get_user(request: Request):
     return await get_current_user(request.headers.get('x-token'))
 
@@ -34,12 +30,14 @@ def get_user_type():
     return db.query(models.UserType).all()
 
 
-@router.get('/{user_id}', response_model=User, status_code=status.HTTP_200_OK)
+@router.get('/{user_id}', response_model=User, status_code=status.HTTP_200_OK,
+            dependencies=[Depends(get_header_token)])
 async def get_user(user_id: int):
     return db.query(models.Account).filter(models.Account.id == user_id).first()
 
 
-@router.put('/{user_id}', response_model=User, status_code=status.HTTP_200_OK)
+@router.put('/{user_id}', response_model=User, status_code=status.HTTP_200_OK,
+            dependencies=[Depends(get_header_token)])
 def update_user(user_id: int, user: User):
     user_to_update = db.query(models.Account).filter(models.Account.id == user_id).first()
     user_to_update.first_name = user.first_name
@@ -53,7 +51,7 @@ def update_user(user_id: int, user: User):
     return user_to_update
 
 
-@router.delete('/{user_id}', status_code=status.HTTP_200_OK)
+@router.delete('/{user_id}', status_code=status.HTTP_200_OK, dependencies=[Depends(get_header_token)])
 def delete_user(user_id: int):
     user_to_delete = db.query(models.Account).filter(models.Account.id == user_id).first()
 

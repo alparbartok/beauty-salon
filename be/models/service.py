@@ -1,13 +1,18 @@
-from datetime import time
+from datetime import timedelta
 from pydantic import BaseModel
+
+
+class ServicePopulator(BaseModel):
+    value: int
+    label: str
 
 
 class Service(BaseModel):
     id: int
     name: str
-    price: float
+    price: int
     service_type: int
-    duration: time
+    duration: int
 
     class Config:
         orm_mode = True

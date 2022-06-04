@@ -17,10 +17,10 @@ class UserType(Base):
 class Service(Base):
     __tablename__ = 'service'
     id = Column(Integer, primary_key=True)
-    name = Column(String(20), nullable=False)
+    name = Column(String(80), nullable=False)
     price = Column(Integer, nullable=False)
     service_type = Column(Integer, ForeignKey('service_type.id'))
-    duration = Column(Time, nullable=False)
+    duration = Column(Integer, nullable=False)
 
 
 class Account(Base):

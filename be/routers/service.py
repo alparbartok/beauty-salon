@@ -1,9 +1,8 @@
-from fastapi import APIRouter, status, Depends, HTTPException
+from fastapi import APIRouter, status, HTTPException
 from database import SessionLocal
 from models.service import Service
 from sql import models
 from typing import List
-from dependecies.authentication import verify_admin
 
 db = SessionLocal()
 
@@ -18,9 +17,15 @@ def get_services():
     return db.query(models.Service).all()
 
 
-@router.post('', response_model=Service, status_code=status.HTTP_200_OK, dependencies=Depends(verify_admin))
+@router.post('', response_model=Service, status_code=status.HTTP_200_OK)
 def create_service(service: Service):
-    new_service = Service(service)
+    new_service = models.Service(
+        id=service.id,
+        name=service.name,
+        price=service.price,
+        service_type=service.service_type,
+        duration=service.duration
+    )
 
     db.add(new_service)
     db.commit()
