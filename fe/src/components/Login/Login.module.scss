@@ -29,6 +29,19 @@
   }
 }
 
+.loginIconActive {
+  background-color: pink;
+  border-color: pink;
+
+  & > label {
+    color: black;
+  }
+
+  & > svg > path {
+    fill: black;
+  }
+}
+
 .fieldWrapper {
   display: flex;
   flex-direction: column;
@@ -146,7 +159,7 @@
   border-radius: 50%;
   cursor: pointer;
   color: pink;
-  padding: .3rem;
+  padding: 0.3rem;
 
   &:hover {
     color: black;

@@ -20,8 +20,17 @@ export const Appointment = ({ access_code, onBack }) => {
       <div className={style.formWrapper} style={{ textAlign: "center" }}>
         <h1>We encountered an issue</h1>
         <p style={{ fontWeight: 700, fontSize: "1.2rem" }}>
-          Appointment with code {access_code} doesn't exists, please check you
-          code
+          Appointment with code{" "}
+          <label
+            style={{
+              backgroundColor: "pink",
+              padding: ".2rem .5rem",
+              borderRadius: ".3rem",
+            }}
+          >
+            {access_code}
+          </label>{" "}
+          doesn't exists, please check you code
         </p>
         <button onClick={onBack} className={style.deleteButton}>
           Back

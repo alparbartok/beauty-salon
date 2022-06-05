@@ -26,7 +26,7 @@ export const useServices = (type) => {
     }
   }, [type]);
 
-  return state;
+  return [state, () => setState([])];
 };
 
 export const useWorkers = () => {
@@ -60,5 +60,5 @@ export const useAvailablePeriods = (worker_id, appointment) => {
     }
   }, [worker_id, JSON.stringify(appointment)]);
 
-  return state;
+  return [state, () => setState([])];
 };

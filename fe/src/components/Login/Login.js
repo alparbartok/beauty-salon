@@ -5,11 +5,12 @@ import { useAuth } from "../../hooks/useAuth";
 import { BsPersonCircle } from "react-icons/bs";
 import style from "./Login.module.scss";
 import { CgClose } from "react-icons/cg";
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import { MdLogout } from "react-icons/md";
 
 export const Login = forwardRef(({ registerRef }, ref) => {
   const navigate = useNavigate();
+  const location = useLocation();
   const [open, setOpen] = useState(false);
   const { login, error, setError, user, logged, logout } = useAuth();
   const {
@@ -108,7 +109,9 @@ export const Login = forwardRef(({ registerRef }, ref) => {
       </Modal>
       <>
         <div
-          className={style.loginIcon}
+          className={`${style.loginIcon} ${
+            location.pathname === "/account" && style.loginIconActive
+          }`}
           onClick={() => {
             logged ? navigate("account") : setOpen(true);
           }}

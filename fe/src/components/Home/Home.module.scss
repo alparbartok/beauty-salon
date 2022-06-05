@@ -1,6 +1,9 @@
 .wrapper {
   height: calc(100vh - 3rem);
   overflow-y: auto;
+  background: linear-gradient(180deg, rgba(pink, .8), white 30%);
+  background-repeat: no-repeat;
+  background-attachment: fixed;
 
   &::-webkit-scrollbar {
     display: none;
@@ -9,9 +12,7 @@
 
 .section {
   display: flex;
-  padding: 2rem 0;
-  margin: 0 2rem;
-  border-bottom: 0.1rem solid pink;
+  padding: 2rem;
   justify-content: space-around;
 
   & > label {
@@ -20,10 +21,7 @@
     border-radius: 0.3rem;
     padding: 1rem;
     box-shadow: 0.1rem 0rem 0.3rem 0.1rem pink;
-  }
-
-  &:nth-of-type(2n) img {
-    background-color: red;
+    background-color: white;
   }
 }
 
@@ -31,5 +29,5 @@
   width: 20rem;
   height: 25rem;
   border-radius: 0.3rem;
-  box-shadow: 0.2rem 0.2rem 0.7rem 0.1rem black;
+  box-shadow: 0.2rem 0.2rem 0.7rem 0.1rem rgba(black, 0.5);
 }

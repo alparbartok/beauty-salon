@@ -24,11 +24,15 @@ const Header = () => {
         <input
           className={style.codeInput}
           placeholder="Appointment code"
+          value={access_code}
           onChange={(v) => setAccessCode(v.currentTarget.value)}
         />
         <button
           className={style.searchButton}
-          onClick={() => navigate(`/appointments/${access_code}`)}
+          onClick={() => {
+            setAccessCode("");
+            navigate(`/appointments/${access_code}`);
+          }}
         >
           search
         </button>

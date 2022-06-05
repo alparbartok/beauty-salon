@@ -40,13 +40,16 @@ export const NewAppointment = () => {
 
   const serviceTypes = useServiceTypes();
   const employees = useWorkers();
-  const services = useServices(watch("service_type"));
-  const availablePeriods = useAvailablePeriods(watch("worker_id"), {
-    appointment_date:
-      watch("appointment_date") &&
-      format(watch("appointment_date"), "yyyy-MM-dd"),
-    service_id: watch("service"),
-  });
+  const [services, resetServices] = useServices(watch("service_type"));
+  const [availablePeriods, resetPeriods] = useAvailablePeriods(
+    watch("worker_id"),
+    {
+      appointment_date:
+        watch("appointment_date") &&
+        format(watch("appointment_date"), "yyyy-MM-dd"),
+      service_id: watch("service"),
+    }
+  );
 
   const onSubmit = (appointment) => {
     appointmentApi
@@ -63,6 +66,8 @@ export const NewAppointment = () => {
       .then(({ data }) => {
         setConfirmation(data);
         reset();
+        resetServices();
+        resetPeriods();
       });
   };
 
