@@ -3,6 +3,7 @@ import style from "./Header.module.scss";
 import { Login } from "../Login/Login";
 import { Register } from "../Register/Register";
 import { useRef, useState } from "react";
+import logo from "../../assets/logo.png";
 
 const Header = () => {
   const location = useLocation();
@@ -37,11 +38,7 @@ const Header = () => {
           search
         </button>
       </div>
-      <img
-        className={style.image}
-        src="https://thumbs.dreamstime.com/b/golden-beauty-salon-logo-illustration-beautiful-salons-woman-face-hairstyles-glitter-color-black-background-228490013.jpg"
-        alt=""
-      />
+      <img className={style.image} src={logo} alt="" />
       <div className={style.logoWrapper}>
         <NavLink
           className={({ isActive }) =>
